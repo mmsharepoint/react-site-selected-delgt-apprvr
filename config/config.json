@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "approve-site-selected-permissions-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/approveSiteSelectedPermissions/ApproveSiteSelectedPermissionsWebPart.js",
+          "manifest": "./src/webparts/approveSiteSelectedPermissions/ApproveSiteSelectedPermissionsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ApproveSiteSelectedPermissionsWebPartStrings": "lib/webparts/approveSiteSelectedPermissions/loc/{locale}.js"
+  }
+}

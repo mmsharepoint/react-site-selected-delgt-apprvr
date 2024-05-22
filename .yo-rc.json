@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.18.2",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "react-site-selected-delgt-apprvr",
+    "libraryId": "9004c0f3-6745-452a-a95b-f4981057985e",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "react-site-selected-delgt-apprvr",
+    "solutionShortDescription": "react-site-selected-delgt-apprvr description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "react-site-selected-delgt-apprvr-client-side-solution",
+    "id": "9004c0f3-6745-452a-a95b-f4981057985e",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "react-site-selected-delgt-apprvr description"
+      },
+      "longDescription": {
+        "default": "react-site-selected-delgt-apprvr description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "react-site-selected-delgt-apprvr Feature",
+        "description": "The feature that activates elements of the react-site-selected-delgt-apprvr solution.",
+        "id": "3e2f3c03-12bb-461d-9e78-0e0808f39cf8",
+        "version": "1.0.0.0"
+      }
+    ],
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Application.Read.All"	
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Sites.FullControl.All"	
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/react-site-selected-delgt-apprvr.sppkg"
+  }
+}
