@@ -1,8 +1,6 @@
 import { ServiceScope } from "@microsoft/sp-core-library";
-// import { MSGraphClientFactory } from "@microsoft/sp-http";
 
 export interface IApproveSiteSelectedPermissionsProps {
-  description: string;
   isAdminMode: boolean;
   isDarkTheme: boolean;
   environmentMessage: string;

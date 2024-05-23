@@ -1,8 +1,8 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
+    "PropertyPaneDescription": "Sites.Selected Config",
     "PropertyPaneIsAdminMode": "Is Admin Mode",
-    "BasicGroupName": "Group Name",
+    "BasicGroupName": "Web part properties",
     "DescriptionFieldLabel": "Description Field",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",

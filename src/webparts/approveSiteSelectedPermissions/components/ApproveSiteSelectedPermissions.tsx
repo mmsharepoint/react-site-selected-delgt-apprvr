@@ -49,14 +49,15 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
         }
       </div>
       <div className={styles.field}>
-        <Dropdown
+        <div className={styles.permDD}>
+          <Dropdown
               label="Grant permission"
               selectedKey={selectedPermission ? selectedPermission.key : undefined}
               // eslint-disable-next-line react/jsx-no-bind
               onChange={onPermissionChange}
               placeholder="Select a permission"
               options={dropdownPermissionOptions} />
-
+        </div>
       </div>
       <div className={styles.field}>
         <PrimaryButton text="Approve prermissions" onClick={assignPermissions} allowDisabledFocus disabled={checkSiteAccess()} />

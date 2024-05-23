@@ -3,7 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField,
+  // PropertyPaneTextField,
   PropertyPaneToggle,
   IPropertyPaneDropdownOption,
   PropertyPaneDropdown
@@ -18,7 +18,6 @@ import GraphService from '../../services/GraphService';
 import { IApp } from '../../model/IApp';
 
 export interface IApproveSiteSelectedPermissionsWebPartProps {
-  description: string;
   isAdminMode: boolean;
   selectedApp: string;
 }
@@ -32,7 +31,6 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
     const element: React.ReactElement<IApproveSiteSelectedPermissionsProps> = React.createElement(
       ApproveSiteSelectedPermissions,
       {
-        description: this.properties.description,
         isAdminMode: this.properties.isAdminMode,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
@@ -121,9 +119,9 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                /* PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                }),
+                }), */
                 PropertyPaneToggle('isAdminMode', {
                   label: strings.PropertyPaneIsAdminMode
                 }),
