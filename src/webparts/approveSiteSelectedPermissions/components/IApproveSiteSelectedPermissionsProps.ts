@@ -1,12 +1,12 @@
 import { ServiceScope } from "@microsoft/sp-core-library";
 
 export interface IApproveSiteSelectedPermissionsProps {
-  isAdminMode: boolean;
-  isDarkTheme: boolean;
-  environmentMessage: string;
   hasTeamsContext: boolean;
+  isAdminMode: boolean;
+  userEMail: string;
   userDisplayName: string;
   siteId: string;
+  currentSiteUrl: string;
   serviceScope: ServiceScope;
   selectedApp: string;
 }

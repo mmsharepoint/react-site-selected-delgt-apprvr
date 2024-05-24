@@ -5,10 +5,12 @@ import styles from './ApproveSiteSelectedPermissions.module.scss';
 import type { IApproveSiteSelectedPermissionsProps } from './IApproveSiteSelectedPermissionsProps';
 import { SelectSite } from "./SelectSite";
 import GraphService from '../../../services/GraphService';
+import SPService from '../../../services/SPService';
 
 export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermissionsProps> = (props) => {
   const [selectedPermission, setSelectedPermission] = React.useState<IDropdownOption>();
   const [selectedSiteID, setSelectedSiteID] = React.useState<string>(props.siteId);
+  const [siteAccess, setSiteAccess] = React.useState<boolean>(false);
 
   const onPermissionChange = (event: React.FormEvent<HTMLDivElement>, item: IDropdownOption): void => {
     setSelectedPermission(item);
@@ -21,8 +23,10 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
     { key: 'read', text: 'Read' }
   ];
 
-  const checkSiteAccess = () => {
-    return false;
+  const checkSiteAccess = async () => {
+    const spService = new SPService(props.serviceScope);
+    const isAdmin = await spService.isSiteAdmin(props.userEMail, props.currentSiteUrl);
+    setSiteAccess(isAdmin);
   };
 
   const assignPermissions = async () => {
@@ -35,8 +39,13 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
 
   const retrieveSiteID = React.useCallback((siteID: string) => {
     setSelectedSiteID(siteID);
+    checkSiteAccess();
   }, []);
 
+  React.useEffect(() => {
+    checkSiteAccess();
+  }, []);
+  
   return (
     <section className={`${styles.approveSiteSelectedPermissions} ${props.hasTeamsContext ? styles.teams : ''}`}>
       <div className={styles.field}>          
@@ -60,7 +69,7 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
         </div>
       </div>
       <div className={styles.field}>
-        <PrimaryButton text="Approve prermissions" onClick={assignPermissions} allowDisabledFocus disabled={checkSiteAccess()} />
+        <PrimaryButton text="Approve prermissions" onClick={assignPermissions} allowDisabledFocus disabled={!siteAccess} />
       </div>
     </section>
   );
