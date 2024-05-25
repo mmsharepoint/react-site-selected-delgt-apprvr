@@ -6,7 +6,6 @@ export interface IApproveSiteSelectedPermissionsProps {
   userEMail: string;
   userDisplayName: string;
   siteId: string;
-  currentSiteUrl: string;
   serviceScope: ServiceScope;
   selectedApp: string;
 }

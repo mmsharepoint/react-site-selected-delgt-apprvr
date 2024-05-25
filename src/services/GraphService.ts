@@ -47,6 +47,18 @@ export default class GraphService {
     return response.value[0].displayName;
   }
 
+  public async isSiteAdmin(userEMail: string, currentSiteId: string): Promise<boolean> {
+    this.client = await this.msGraphClientFactory.getClient('3');
+    const response = await this.client
+            .api(`sites/${currentSiteId}/lists/User Information List/items`)
+            .version('v1.0')
+            .header('Prefer','HonorNonIndexedQueriesWarningMayFailRandomly')
+            .expand('fields($select=EMail,IsSiteAdmin)')
+            .filter(`fields/EMail eq '${userEMail}'`)
+            .get();
+    return response.value[0].fields.IsSiteAdmin;
+  }
+
   public async grantPermissions(role: string, appId: string, displayName: string, siteId: string): Promise<any[]> {
     this.client = await this.msGraphClientFactory.getClient('3');
     const requestBody = {

@@ -5,7 +5,6 @@ import styles from './ApproveSiteSelectedPermissions.module.scss';
 import type { IApproveSiteSelectedPermissionsProps } from './IApproveSiteSelectedPermissionsProps';
 import { SelectSite } from "./SelectSite";
 import GraphService from '../../../services/GraphService';
-import SPService from '../../../services/SPService';
 
 export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermissionsProps> = (props) => {
   const [selectedPermission, setSelectedPermission] = React.useState<IDropdownOption>();
@@ -24,8 +23,8 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
   ];
 
   const checkSiteAccess = async () => {
-    const spService = new SPService(props.serviceScope);
-    const isAdmin = await spService.isSiteAdmin(props.userEMail, props.currentSiteUrl);
+    const graphService = new GraphService(props.serviceScope);
+    const isAdmin = await graphService.isSiteAdmin(props.userEMail, props.siteId);
     setSiteAccess(isAdmin);
   };
 

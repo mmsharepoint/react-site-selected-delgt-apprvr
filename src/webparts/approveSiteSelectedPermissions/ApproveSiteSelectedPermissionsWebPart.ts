@@ -35,8 +35,7 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
         userDisplayName: this.context.pageContext.user.displayName,
         serviceScope: this.context.serviceScope,
         selectedApp: this.properties.selectedApp,
-        siteId: this.context.pageContext.site.id + ',' + this.context.pageContext.web.id,
-        currentSiteUrl: this.context.pageContext.site.absoluteUrl
+        siteId: this.context.pageContext.site.id + ',' + this.context.pageContext.web.id
       }
     );
 
