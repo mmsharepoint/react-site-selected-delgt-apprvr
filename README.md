@@ -18,7 +18,7 @@ This web part allows the using Administrator to apply permissions based on the n
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.18.2-green.svg)
+![version](https://img.shields.io/badge/version-1.19.0-green.svg)
 
 ## Applies to
 
