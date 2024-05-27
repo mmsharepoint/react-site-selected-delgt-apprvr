@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PrimaryButton } from '@fluentui/react/lib/Button';
 import { Dropdown, DropdownMenuItemType, IDropdownOption } from "@fluentui/react/lib/Dropdown";
 import styles from './ApproveSiteSelectedPermissions.module.scss';
+import * as strings from 'ApproveSiteSelectedPermissionsWebPartStrings';
 import type { IApproveSiteSelectedPermissionsProps } from './IApproveSiteSelectedPermissionsProps';
 import { SelectSite } from "./SelectSite";
 import GraphService from '../../../services/GraphService';
@@ -16,7 +17,7 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
   };
 
   const dropdownPermissionOptions = [
-    { key: 'permissionssHeader', text: 'Permissionss', itemType: DropdownMenuItemType.Header },
+    { key: 'permissionssHeader', text: strings.PermissionssHeader, itemType: DropdownMenuItemType.Header },
     { key: 'fullcontrol', text: 'Full Control' },
     { key: 'write', text: 'Write' },
     { key: 'read', text: 'Read' }
@@ -48,7 +49,7 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
   return (
     <section className={`${styles.approveSiteSelectedPermissions} ${props.hasTeamsContext ? styles.teams : ''}`}>
       <div className={styles.field}>          
-        <h2>Set Sites.Selected Delegated Scope Permissions</h2>
+        <h2>{strings.HeaderLabel}</h2>
       </div>
       
       <div>
@@ -59,16 +60,16 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
       <div className={styles.field}>
         <div className={styles.permDD}>
           <Dropdown
-              label="Grant permission"
+              label={strings.GrantPermissionLabel}
               selectedKey={selectedPermission ? selectedPermission.key : undefined}
               // eslint-disable-next-line react/jsx-no-bind
               onChange={onPermissionChange}
-              placeholder="Select a permission"
+              placeholder={strings.PermissionsPlaceholder}
               options={dropdownPermissionOptions} />
         </div>
       </div>
       <div className={styles.field}>
-        <PrimaryButton text="Approve prermissions" onClick={assignPermissions} allowDisabledFocus disabled={!siteAccess} />
+        <PrimaryButton text={strings.ApprovePrermissionsLabel} onClick={assignPermissions} allowDisabledFocus disabled={!siteAccess} />
       </div>
     </section>
   );

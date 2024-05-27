@@ -2,7 +2,6 @@ declare interface IApproveSiteSelectedPermissionsWebPartStrings {
   PropertyPaneDescription: string;
   PropertyPaneIsAdminMode: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
   AppLocalEnvironmentSharePoint: string;
   AppLocalEnvironmentTeams: string;
   AppLocalEnvironmentOffice: string;
@@ -12,6 +11,12 @@ declare interface IApproveSiteSelectedPermissionsWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  HeaderLabel: string;
+  CurrentUserLabel: string;
+  PermissionsPlaceholder: string;
+  GrantPermissionLabel: string;
+  ApprovePrermissionsLabel: string;
+  PermissionssHeader: string;
 }
 
 declare module 'ApproveSiteSelectedPermissionsWebPartStrings' {
