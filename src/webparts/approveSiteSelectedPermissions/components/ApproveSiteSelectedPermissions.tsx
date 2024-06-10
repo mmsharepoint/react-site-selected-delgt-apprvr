@@ -69,7 +69,10 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
         </div>
       </div>
       <div className={styles.field}>
-        <PrimaryButton text={strings.ApprovePrermissionsLabel} onClick={assignPermissions} allowDisabledFocus disabled={!siteAccess} />
+        <PrimaryButton text={strings.ApprovePrermissionsLabel} 
+                        onClick={assignPermissions} 
+                        allowDisabledFocus 
+                        disabled={!siteAccess || props.selectedApp === undefined} />
       </div>
     </section>
   );
