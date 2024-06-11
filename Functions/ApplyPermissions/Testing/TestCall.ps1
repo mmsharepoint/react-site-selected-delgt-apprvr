@@ -8,7 +8,7 @@ $PublicClient = [Microsoft.Identity.Client.PublicClientApplicationBuilder]::Crea
 $token = Get-MsalToken -PublicClientApplication $PublicClient -TenantId $TenantId -Scopes $Scopes
 $token.AccessToken
 
-$body = @{URL = "https://mmoellermvp.sharepoint.com"}
+$body = @{URL = "https://mmoellermvp.sharepoint.com/sites/SharingDemo"}
 Invoke-RestMethod -Uri "http://localhost:7086/api/Function1" -Headers @{Authorization = "Bearer $($token.AccessToken)" } -body $body
 
 $body = @{
