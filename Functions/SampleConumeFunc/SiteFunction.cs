@@ -4,7 +4,10 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SampleConsumeFunc.Model;
 using SampleConsumeFunc.Services;
+using System.Text;
+using System.Text.Json;
 
 namespace SampleConsumeFunc
 {
@@ -34,6 +37,18 @@ namespace SampleConsumeFunc
 
       string siteUrl = req.Query["URL"];
       bool siteDescreption = await _graphClientService.UpdateSiteDescreption(bearerToken, siteUrl);
+
+      string bodyContents;
+      using (Stream receiveStream = req.Body)
+      {
+        using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+        {
+          bodyContents = readStream.ReadToEndAsync().Result;
+        }
+      }
+      //_logger.LogInformation($"Body: {bodyContents}");
+      //var body = JsonSerializer.Deserialize<Request>(bodyContents);
+      //_logger.LogInformation($"URL: {body.URL}");
       return new OkObjectResult("Welcome to Azure Functions!");
     }
   }

@@ -34,3 +34,5 @@ obj
 *.scss.ts
 /Functions/SampleFunction/Testing/TestCall.ps1
 /Functions/SampleFunction/Testing/TestCall.txt
+/Functions/ApplyPermissions/Testing/TestCall.txt
+/Functions/ApplyPermissions/Testing/TestCall.ps1

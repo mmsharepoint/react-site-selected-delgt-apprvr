@@ -33,7 +33,15 @@ namespace SampleConsumeFunc.Services
         Description = "Next Description"
       };
 
-      await _appGraphClient.Sites[site.Id].PatchAsync(newSite);
+      try
+      {
+        await _appGraphClient.Sites[site.Id].PatchAsync(newSite);
+      }
+      catch (Microsoft.Graph.Models.ODataErrors.ODataError ex)
+      {
+        _logger.LogError(ex.Message);
+      }
+
       return true;
     }
 
@@ -42,19 +50,20 @@ namespace SampleConsumeFunc.Services
       var tenantId = _config["tenantId"];
       var clientId = _config["clientId"];
       var clientSecret = _config["clientSecret"];
+      var scopes = new[] { "https://graph.microsoft.com/.default" };
 
       if (string.IsNullOrEmpty(tenantId) ||
           string.IsNullOrEmpty(clientId) ||
           string.IsNullOrEmpty(clientSecret))
       {
-        _logger.LogError("Required settings missing: 'tenantId', 'clientId', and 'clientSecret'.");
+        _logger.LogError("Required settings missing: 'tenantId', 'clientId', or 'clientSecret'.");
         return null;
       }
 
       var onBehalfOfCredential = new OnBehalfOfCredential(
           tenantId, clientId, clientSecret, userAssertion);
-
-      return new GraphServiceClient(onBehalfOfCredential);
+      
+      return new GraphServiceClient(onBehalfOfCredential, scopes);
     }
   }
 }
