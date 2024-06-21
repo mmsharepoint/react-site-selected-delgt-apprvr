@@ -35,12 +35,8 @@
     ],
     "webApiPermissionRequests": [
       {
-        "resource": "Microsoft Graph",
-        "scope": "Application.Read.All"	
-      },
-      {
-        "resource": "Microsoft Graph",
-        "scope": "Sites.FullControl.All"	
+        "resource": "0a8dfbc9-0423-495b-a1e6-1055f0ca69c2",
+        "scope": "user_impersonation"
       }
     ]
   },

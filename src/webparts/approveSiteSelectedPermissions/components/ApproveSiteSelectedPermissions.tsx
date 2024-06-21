@@ -5,11 +5,11 @@ import styles from './ApproveSiteSelectedPermissions.module.scss';
 import * as strings from 'ApproveSiteSelectedPermissionsWebPartStrings';
 import type { IApproveSiteSelectedPermissionsProps } from './IApproveSiteSelectedPermissionsProps';
 import { SelectSite } from "./SelectSite";
-import GraphService from '../../../services/GraphService';
+import FunctionService from '../../../services/FunctionService';
 
 export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermissionsProps> = (props) => {
   const [selectedPermission, setSelectedPermission] = React.useState<IDropdownOption>();
-  const [selectedSiteID, setSelectedSiteID] = React.useState<string>(props.siteId);
+  const [selectedSiteID, setSelectedSiteID] = React.useState<string>(props.site.Id);
   const [siteAccess, setSiteAccess] = React.useState<boolean>(false);
 
   const onPermissionChange = (event: React.FormEvent<HTMLDivElement>, item: IDropdownOption): void => {
@@ -24,27 +24,27 @@ export const ApproveSiteSelectedPermissions: React.FC<IApproveSiteSelectedPermis
   ];
 
   const checkSiteAccess = async () => {
-    const graphService = new GraphService(props.serviceScope);
-    const isAdmin = await graphService.isSiteAdmin(props.userEMail, props.siteId);
+    const graphService = new FunctionService(props.serviceScope);
+    const isAdmin = await graphService.isSiteAdmin(props.userEMail, props.site.Id);
     setSiteAccess(isAdmin);
   };
 
   const assignPermissions = async () => {
-    const graphService = new GraphService(props.serviceScope);
-    const appDisplayName = await graphService.servicePrincipal(props.selectedApp);
+    const functionService = new FunctionService(props.serviceScope);
 
-    const resp = await graphService.grantPermissions(selectedPermission?.key as string, props.selectedApp, appDisplayName, selectedSiteID!);
+    const resp = await functionService.grantPermissions(selectedPermission?.key as string, props.selectedApp, props.site);
     console.log(resp);
   };
 
   const retrieveSiteID = React.useCallback((siteID: string) => {
     setSelectedSiteID(siteID);
+    console.log(selectedSiteID);
     checkSiteAccess();
   }, []);
-
+ 
   React.useEffect(() => {
     checkSiteAccess();
-  }, []);
+  } , []);
   
   return (
     <section className={`${styles.approveSiteSelectedPermissions} ${props.hasTeamsContext ? styles.teams : ''}`}>

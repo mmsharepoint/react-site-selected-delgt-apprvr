@@ -36,3 +36,4 @@ obj
 /Functions/SampleFunction/Testing/TestCall.txt
 /Functions/ApplyPermissions/Testing/TestCall.txt
 /Functions/ApplyPermissions/Testing/TestCall.ps1
+src/services/azFunct.json

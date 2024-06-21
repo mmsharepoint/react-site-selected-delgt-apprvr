@@ -3,7 +3,6 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  // PropertyPaneTextField,
   PropertyPaneToggle,
   IPropertyPaneDropdownOption,
   PropertyPaneDropdown
@@ -14,8 +13,8 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'ApproveSiteSelectedPermissionsWebPartStrings';
 import { ApproveSiteSelectedPermissions } from './components/ApproveSiteSelectedPermissions';
 import { IApproveSiteSelectedPermissionsProps } from './components/IApproveSiteSelectedPermissionsProps';
-import GraphService from '../../services/GraphService';
 import { IApp } from '../../model/IApp';
+import FunctionService from '../../services/FunctionService';
 
 export interface IApproveSiteSelectedPermissionsWebPartProps {
   isAdminMode: boolean;
@@ -26,6 +25,8 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
   private _servicePrincipals: IApp[];
 
   public render(): void {
+    const absoluteUrl: URL = new URL(this.context.pageContext.site.absoluteUrl);
+    const host = absoluteUrl.hostname;
     const element: React.ReactElement<IApproveSiteSelectedPermissionsProps> = React.createElement(
       ApproveSiteSelectedPermissions,
       {
@@ -35,7 +36,11 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
         userDisplayName: this.context.pageContext.user.displayName,
         serviceScope: this.context.serviceScope,
         selectedApp: this.properties.selectedApp,
-        siteId: this.context.pageContext.site.id + ',' + this.context.pageContext.web.id
+        site: {
+          Id: host + ',' + this.context.pageContext.site.id + ',' + this.context.pageContext.web.id,
+          Url: this.context.pageContext.site.absoluteUrl,
+          Title: ''
+        }
       }
     );
 
@@ -44,9 +49,8 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
 
   protected async onInit(): Promise<void> {
     // https://www.voitanos.io/blog/sharepoint-framework-dynamic-property-pane-dropdown/
-    const graphService = new GraphService(this.context.serviceScope);
-
-    this._servicePrincipals = await graphService.servicePrincipals();
+    const functionService = new FunctionService(this.context.serviceScope);
+    this._servicePrincipals = await functionService.servicePrincipals('dlg');
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
@@ -85,9 +89,6 @@ export default class ApproveSiteSelectedPermissionsWebPart extends BaseClientSid
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                /* PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                }), */
                 PropertyPaneToggle('isAdminMode', {
                   label: strings.PropertyPaneIsAdminMode
                 }),

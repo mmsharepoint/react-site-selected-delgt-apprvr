@@ -1,4 +1,4 @@
 export interface IApp {
   DisplayName: string;
-  Id: string;  
+  Id: string;
 }

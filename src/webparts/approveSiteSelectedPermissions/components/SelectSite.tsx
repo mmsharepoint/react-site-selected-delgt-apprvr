@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Dropdown, DropdownMenuItemType, IDropdownOption } from '@fluentui/react/lib/Dropdown';
 import { SearchBox } from "@fluentui/react/lib/SearchBox";
-import GraphService from '../../../services/GraphService';
+import FunctionService from '../../../services/FunctionService';
 import styles from './SelectSite.module.scss';
 import { ISelectSiteProps } from './ISelectSiteProps';
 import { ISite } from '../../../model/ISite';
 
 export const SelectSite: React.FC<ISelectSiteProps> = (props) => {
-  const graphService = new GraphService(props.serviceScope);
+  const functionService = new FunctionService(props.serviceScope);
 
   const [newSearchVal, setNewSearchVal] = React.useState<string>("");
   const [sites, setSites] = React.useState<ISite[]>([]);
@@ -17,7 +17,7 @@ export const SelectSite: React.FC<ISelectSiteProps> = (props) => {
   const searchResults = (newValue: string): void => {
     setNewSearchVal(newSearchVal);
     const fetchData = async () => {
-      const searchResults = await graphService.searchSites(newValue, 1);
+      const searchResults = await functionService.searchSites(newValue, 1);
       setSites(searchResults);
     }
   

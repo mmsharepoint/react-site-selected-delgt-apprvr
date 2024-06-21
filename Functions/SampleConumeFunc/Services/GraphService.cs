@@ -20,7 +20,7 @@ namespace SampleConsumeFunc.Services
       _logger = logger;
     }
 
-    public async Task<bool> UpdateSiteDescreption(string userAssertion, string siteUrl)
+    public async Task<bool> UpdateSiteDescreption(string userAssertion, string siteUrl, string newSiteDescreption)
     {
       _appGraphClient = GetUserGraphClient(userAssertion);
       Uri uri = new Uri(siteUrl);
@@ -30,7 +30,7 @@ namespace SampleConsumeFunc.Services
 
       var newSite = new Site
       {
-        Description = "Next Description"
+        Description = newSiteDescreption
       };
 
       try

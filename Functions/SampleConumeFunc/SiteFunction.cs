@@ -36,8 +36,10 @@ namespace SampleConsumeFunc
       _logger.LogInformation("Bootstrap token: " + bearerToken); // not nessesary
 
       string siteUrl = req.Query["URL"];
-      bool siteDescreption = await _graphClientService.UpdateSiteDescreption(bearerToken, siteUrl);
+      string siteDescreption = req.Query["Descreption"];
+      bool siteDescreptionUpdated = await _graphClientService.UpdateSiteDescreption(bearerToken, siteUrl, siteDescreption);
 
+      // For a potential POST
       string bodyContents;
       using (Stream receiveStream = req.Body)
       {
@@ -46,9 +48,9 @@ namespace SampleConsumeFunc
           bodyContents = readStream.ReadToEndAsync().Result;
         }
       }
-      //_logger.LogInformation($"Body: {bodyContents}");
-      //var body = JsonSerializer.Deserialize<Request>(bodyContents);
-      //_logger.LogInformation($"URL: {body.URL}");
+      var body = JsonSerializer.Deserialize<Request>(bodyContents);
+      _logger.LogInformation($"URL: {body.URL}");
+      _logger.LogInformation($"URL: {body.Descreption}");
       return new OkObjectResult("Welcome to Azure Functions!");
     }
   }
